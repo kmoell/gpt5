@@ -1,342 +1,324 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌌 ВАЙБКОДИНГ ∞ | Quantum Neural Reality</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Сверхкрасивый сайт</title>
+  <meta name="theme-color" content="#0b0f1a" />
+  <meta name="color-scheme" content="dark light" />
+
+  <!-- Inter (Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#070b14;
+      --ink:#e7ecff;
+      --muted:#b7c1ffcc;
+      --brand:#7c9bff;
+      --accent:#7affd1;
+      --glass-bg:rgba(255,255,255,0.06);
+      --glass-brd:rgba(255,255,255,0.16);
+      --blur:16px;
+      --radius:18px;
+      --grid:clamp(16px,1.5vw,24px);
+      --max:1120px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background: radial-gradient(1200px 800px at 10% 10%, #0b1530 0%, transparent 60%),
+                  radial-gradient(1000px 700px at 90% 20%, #10244c 0%, transparent 60%),
+                  radial-gradient(1400px 900px at 50% 120%, #152f66 0%, transparent 60%),
+                  var(--bg);
+      overflow-x:hidden;
+    }
+
+    /* WebGL canvas under content */
+    .webgl {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Soft grain */
+    .grain {
+      position: fixed; inset: 0; z-index: 1; pointer-events:none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.05"/></svg>');
+      mix-blend-mode: soft-light;
+    }
+
+    .wrap{position:relative; z-index:2}
+    .container{max-width:var(--max); margin:0 auto; padding:calc(var(--grid)*4) var(--grid)}
+
+    header{
+      display:flex; align-items:center; justify-content:space-between; gap:var(--grid);
+    }
+    .logo{
+      display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--ink);
+    }
+    .logo-badge{
+      width:36px; height:36px; border-radius:12px;
+      background: conic-gradient(from 210deg, #7affd188, #7c9bff88, #7affd188);
+      outline:1px solid var(--glass-brd);
+      box-shadow: 0 10px 40px #7c9bff22 inset, 0 0 0 1px #ffffff0d inset;
+    }
+    .nav{
+      display:flex; gap:12px; align-items:center;
+      background:var(--glass-bg); backdrop-filter: blur(var(--blur));
+      border:1px solid var(--glass-brd);
+      padding:6px; border-radius:999px;
+    }
+    .chip{
+      padding:10px 14px; border-radius:999px; color:var(--muted); text-decoration:none;
+      transition: color .25s, background .25s;
+    }
+    .chip:hover{ background:#ffffff14; color:var(--ink) }
+
+    .hero{
+      display:grid; grid-template-columns: 1fr; gap:calc(var(--grid)*2);
+      padding-block: calc(var(--grid)*6);
+      align-items:center;
+    }
+    .headline{
+      font-weight:900; letter-spacing:-0.02em;
+      font-size: clamp(38px, 6.8vw, 84px);
+      line-height: 0.98;
+    }
+    .sub{
+      font-size: clamp(16px, 2vw, 20px);
+      color:var(--muted);
+      max-width: 70ch;
+    }
+    .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:calc(var(--grid)*1.5) }
+    .btn{
+      appearance:none; border:0; border-radius:12px; padding:14px 18px; cursor:pointer;
+      color:#0b0f1a; background:linear-gradient(180deg, #8affdc, #67f0c0);
+      box-shadow: 0 8px 30px #67f0c033, 0 0 0 1px #ffffff33 inset;
+      font-weight:700;
+    }
+    .btn.alt{
+      color:var(--ink); background: linear-gradient(180deg, #8ea5ff, #6f8bff);
+    }
+
+    .glass{
+      background: var(--glass-bg); backdrop-filter: blur(var(--blur));
+      border: 1px solid var(--glass-brd);
+      border-radius: var(--radius);
+      padding: clamp(14px, 2.2vw, 22px);
+      box-shadow: 0 20px 60px #00000055, 0 0 0 1px #ffffff0d inset;
+    }
+
+    .features{
+      display:grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--grid); margin-top: calc(var(--grid)*3);
+    }
+    @media (max-width: 900px){
+      .features{ grid-template-columns: 1fr }
+    }
+    .card{
+      position:relative; overflow:hidden; transform-style: preserve-3d; will-change: transform;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .card:hover{ transform: translateY(-6px); box-shadow: 0 24px 80px #00000077 }
+    .card h3{ margin:0 0 8px 0; font-size: 22px; letter-spacing:-0.01em }
+    .card p{ margin:0; color:var(--muted) }
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      background:#ffffff10; padding:8px 12px; border-radius:999px; border:1px solid #ffffff22;
+      color:var(--ink); font-size:14px;
+    }
+    .grad-dot{ width:8px; height:8px; border-radius:99px; background:linear-gradient(180deg,var(--brand), var(--accent)) }
+
+    footer{
+      padding-block: calc(var(--grid)*4);
+      color:var(--muted);
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .card, .btn{ transition: none !important }
+    }
+  </style>
 </head>
 <body>
-    <!-- QUANTUM CURSOR SYSTEM -->
-    <div class="quantum-cursor">
-        <div class="cursor-core"></div>
-        <div class="cursor-particles"></div>
-        <canvas class="cursor-trail"></canvas>
+  <canvas class="webgl" id="bg"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="container">
+      <header class="glass">
+        <a class="logo" href="#">
+          <span class="logo-badge"></span>
+          <strong>Nova</strong>
+        </a>
+        <nav class="nav">
+          <a class="chip" href="#feat">Возможности</a>
+          <a class="chip" href="#show">Галерея</a>
+          <a class="chip" href="#cta">Контакты</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="glass">
+          <span class="pill"><span class="grad-dot"></span> Сверхмягкие анимации</span>
+          <h1 class="headline">Красота, скорость и плавность без компромиссов</h1>
+          <p class="sub">Живой 3D‑фон, стекломорфные слои, точные скролл‑эффекты, адаптивная сетка и шрифт Inter для образцовой читабельности интерфейса [GSAP, Three.js, Lenis, Inter].</p>
+          <div class="cta-row" id="cta">
+            <button class="btn">Начать</button>
+            <button class="btn alt">Узнать больше</button>
+          </div>
+        </div>
+
+        <div class="features" id="feat">
+          <div class="card glass">
+            <h3>3D‑частицы</h3>
+            <p>WebGL‑фон с мерцающими точками и параллаксом не нагружает вёрстку.</p>
+          </div>
+          <div class="card glass">
+            <h3>Скролл‑магия</h3>
+            <p>Плавная прокрутка и точные триггеры появления блоков.</p>
+          </div>
+          <div class="card glass">
+            <h3>Доступность</h3>
+            <p>Уважение к prefers‑reduced‑motion и читабельная типографика.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="glass" id="show" style="margin-top: clamp(24px,4vw,48px);">
+        <h3 style="margin:0 0 8px 0; font-size:26px; letter-spacing:-0.01em">Галерея эффектов</h3>
+        <p class="sub">Секции всплывают по ходу скролла, карточки чуть наклоняются, фон реагирует на курсор и глубину.</p>
+      </section>
+
+      <footer>
+        © 2025 Nova. Все права защищены.
+      </footer>
     </div>
+  </div>
 
-    <!-- NEURAL MATRIX BACKGROUND -->
-    <div class="neural-matrix">
-        <canvas id="matrix-neural"></canvas>
-        <div class="matrix-nodes"></div>
-    </div>
+  <!-- GSAP + ScrollTrigger (jsDelivr) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
 
-    <!-- 3D HOLOGRAM CONTAINER -->
-    <div id="hologram-space"></div>
+  <!-- Three.js (cdnjs) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js" integrity="sha512-8lY3l0nVdNnJc7jQh3J0Cq2z5g9A0V7fWzLwqNYkq4sQm0zTnN0vQq9T8hN8h5b5xV2Gz6b1Y1giJ2yq3oW9xA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- QUANTUM LOADING -->
-    <div class="quantum-loader" id="loader">
-        <div class="loader-core">
-            <div class="quantum-eye">
-                <div class="eye-iris"></div>
-                <div class="eye-scan"></div>
-            </div>
-            <div class="quantum-text">
-                <span class="q-char" style="--delay:0">I</span>
-                <span class="q-char" style="--delay:1">N</span>
-                <span class="q-char" style="--delay:2">I</span>
-                <span class="q-char" style="--delay:3">T</span>
-                <span class="q-char" style="--delay:4">I</span>
-                <span class="q-char" style="--delay:5">A</span>
-                <span class="q-char" style="--delay:6">L</span>
-                <span class="q-char" style="--delay:7">I</span>
-                <span class="q-char" style="--delay:8">Z</span>
-                <span class="q-char" style="--delay:9">I</span>
-                <span class="q-char" style="--delay:10">N</span>
-                <span class="q-char" style="--delay:11">G</span>
-            </div>
-            <div class="quantum-progress">
-                <div class="progress-wave"></div>
-            </div>
-        </div>
-    </div>
+  <!-- Lenis (jsDelivr) -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis/dist/lenis.min.js"></script>
 
-    <!-- NAVIGATION QUANTUM -->
-    <nav class="nav-quantum">
-        <div class="nav-glass-morphism">
-            <div class="nav-brand">
-                <div class="brand-hologram">⧬</div>
-                <span class="brand-text">ВАЙБКОДИНГ∞</span>
-            </div>
-            <div class="nav-items">
-                <a href="#reality" class="nav-link" data-quantum="home">РЕАЛЬНОСТЬ</a>
-                <a href="#neural" class="nav-link" data-quantum="brain">НЕЙРОСЕТЬ</a>
-                <a href="#quantum" class="nav-link" data-quantum="matrix">КВАНТ</a>
-                <a href="#infinity" class="nav-link" data-quantum="space">∞</a>
-            </div>
-            <div class="nav-controls">
-                <button class="ctrl-btn" id="reality-mode">🌌</button>
-                <button class="ctrl-btn" id="sound-wave">🔊</button>
-                <button class="ctrl-btn" id="neural-mode">🧠</button>
-            </div>
-        </div>
-    </nav>
+  <script>
+    // Smooth scroll (Lenis)
+    const lenis = new Lenis({ smoothWheel: true, wheelMultiplier: 0.9 });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf) }
+    requestAnimationFrame(raf);
 
-    <!-- HERO QUANTUM REALITY -->
-    <section id="reality" class="hero-quantum">
-        <div class="quantum-particles" id="hero-particles"></div>
-        
-        <div class="hero-matrix">
-            <div class="title-quantum">
-                <h1 class="quantum-title">
-                    <span class="title-morphing" data-text="ВАЙБКОДИНГ">ВАЙБКОДИНГ</span>
-                    <span class="title-infinity">∞</span>
-                </h1>
-                <div class="subtitle-neural">
-                    <span class="neural-text" id="neural-typing"></span>
-                    <span class="quantum-cursor">█</span>
-                </div>
-            </div>
+    // Link Lenis with GSAP ScrollTrigger for perfect sync
+    gsap.registerPlugin(ScrollTrigger);
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((t)=>{ lenis.raf(t*1000) });
+    gsap.ticker.lagSmoothing(0);
 
-            <div class="quantum-stats">
-                <div class="stat-quantum" data-value="100">
-                    <div class="stat-number">0</div>
-                    <div class="stat-unit">%</div>
-                    <div class="stat-label">AI GENESIS</div>
-                </div>
-                <div class="stat-quantum" data-value="∞">
-                    <div class="stat-number">0</div>
-                    <div class="stat-unit"></div>
-                    <div class="stat-label">DIMENSIONS</div>
-                </div>
-                <div class="stat-quantum" data-value="2025">
-                    <div class="stat-number">0</div>
-                    <div class="stat-unit"></div>
-                    <div class="stat-label">FUTURE ERA</div>
-                </div>
-            </div>
+    // Three.js particles background
+    const canvas = document.getElementById('bg');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+    camera.position.set(0,0,8);
 
-            <div class="quantum-actions">
-                <button class="btn-quantum primary" data-sound="quantum">
-                    <span class="btn-text">ENTER THE MATRIX</span>
-                    <div class="btn-particles"></div>
-                    <div class="btn-energy"></div>
-                </button>
-                <button class="btn-quantum secondary" data-sound="neural">
-                    <span class="btn-text">SOURCE CODE</span>
-                    <div class="btn-hologram"></div>
-                </button>
-            </div>
-        </div>
+    const particles = 2200;
+    const geo = new THREE.BufferGeometry();
+    const pos = new Float32Array(particles*3);
+    const speed = new Float32Array(particles);
 
-        <div class="hero-visual">
-            <div class="hologram-cube">
-                <div class="cube-face front"></div>
-                <div class="cube-face back"></div>
-                <div class="cube-face right"></div>
-                <div class="cube-face left"></div>
-                <div class="cube-face top"></div>
-                <div class="cube-face bottom"></div>
-            </div>
-            
-            <div class="neural-sphere">
-                <div class="sphere-core"></div>
-                <div class="sphere-rings">
-                    <div class="ring r1"></div>
-                    <div class="ring r2"></div>
-                    <div class="ring r3"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+    for(let i=0;i<particles;i++){
+      const i3 = i*3;
+      pos[i3+0] = (Math.random()-0.5)*20;
+      pos[i3+1] = (Math.random()-0.5)*12;
+      pos[i3+2] = (Math.random()-0.5)*14;
+      speed[i] = 0.15 + Math.random()*0.45;
+    }
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    geo.setAttribute('aSpeed', new THREE.BufferAttribute(speed, 1));
 
-    <!-- NEURAL ARCHITECTURE -->
-    <section id="neural" class="section-neural">
-        <div class="neural-header">
-            <h2 class="section-title-quantum">
-                <span class="glitch-layer" data-text="NEURAL ARCHITECTURE">NEURAL ARCHITECTURE</span>
-            </h2>
-            <div class="neural-subtitle">Многомерные вычислительные структуры</div>
-        </div>
+    const mat = new THREE.PointsMaterial({
+      size: 0.035,
+      color: 0x9fb6ff,
+      transparent: true,
+      opacity: 0.9,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
+    });
+    const points = new THREE.Points(geo, mat);
+    scene.add(points);
 
-        <div class="neural-grid">
-            <div class="neural-node" data-neural="deep">
-                <div class="node-hologram"></div>
-                <div class="node-content">
-                    <div class="node-icon">🧠</div>
-                    <h3>Deep Learning Matrix</h3>
-                    <p>Самообучающиеся нейронные сети с квантовой суперпозицией состояний для обработки бесконечных измерений данных</p>
-                    <div class="node-progress">
-                        <div class="progress-quantum" data-progress="98.7"></div>
-                    </div>
-                </div>
-            </div>
+    // Resize
+    function resize(){
+      const w = window.innerWidth, h = window.innerHeight;
+      renderer.setSize(w, h);
+      camera.aspect = w/h;
+      camera.updateProjectionMatrix();
+    }
+    window.addEventListener('resize', resize);
+    resize();
 
-            <div class="neural-node" data-neural="quantum">
-                <div class="node-hologram"></div>
-                <div class="node-content">
-                    <div class="node-icon">⚛️</div>
-                    <h3>Quantum Processing</h3>
-                    <p>Квантовые вычисления с использованием запутанности частиц для мгновенной обработки в параллельных вселенных</p>
-                    <div class="node-progress">
-                        <div class="progress-quantum" data-progress="∞"></div>
-                    </div>
-                </div>
-            </div>
+    // Parallax via mouse
+    const target = {x:0, y:0};
+    window.addEventListener('pointermove', (e)=>{
+      const x = (e.clientX / window.innerWidth) - 0.5;
+      const y = (e.clientY / window.innerHeight) - 0.5;
+      target.x = x; target.y = y;
+    });
 
-            <div class="neural-node" data-neural="cosmic">
-                <div class="node-hologram"></div>
-                <div class="node-content">
-                    <div class="node-icon">🌌</div>
-                    <h3>Cosmic Intelligence</h3>
-                    <p>Анализ данных на масштабах галактических структур с использованием темной материи как вычислительного субстрата</p>
-                    <div class="node-progress">
-                        <div class="progress-quantum" data-progress="100"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    // Animate
+    let t = 0;
+    function loop(){
+      t += 0.003;
+      const p = geo.attributes.position.array;
+      const s = geo.attributes.aSpeed.array;
+      for(let i=0;i<particles;i++){
+        const i3 = i*3;
+        p[i3+1] += Math.sin(t * s[i]) * 0.002; // subtle float
+        p[i3+0] += Math.cos(t * s[i]) * 0.0015;
+      }
+      geo.attributes.position.needsUpdate = true;
 
-    <!-- QUANTUM CODE MATRIX -->
-    <section id="quantum" class="section-matrix">
-        <div class="matrix-rain" id="matrix-bg"></div>
-        
-        <div class="code-quantum">
-            <div class="terminal-quantum">
-                <div class="terminal-header">
-                    <div class="terminal-controls">
-                        <span class="ctrl-dot red"></span>
-                        <span class="ctrl-dot yellow"></span>
-                        <span class="ctrl-dot green"></span>
-                    </div>
-                    <div class="terminal-title">QUANTUM_NEURAL_v∞.∞.∞</div>
-                </div>
-                <div class="terminal-body">
-                    <div class="code-output" id="quantum-code"></div>
-                    <div class="code-input">
-                        <span class="prompt">quantum@matrix:~$ </span>
-                        <input type="text" id="quantum-input" placeholder="Enter quantum command...">
-                    </div>
-                </div>
-            </div>
+      // soft parallax
+      camera.position.x += (target.x*1.2 - camera.position.x)*0.03;
+      camera.position.y += (-target.y*0.8 - camera.position.y)*0.03;
+      camera.lookAt(0,0,0);
 
-            <div class="quantum-metrics">
-                <div class="metric-quantum">
-                    <div class="metric-value" data-count="1337">0</div>
-                    <div class="metric-label">Neural Pathways</div>
-                </div>
-                <div class="metric-quantum">
-                    <div class="metric-value" data-count="42">0</div>
-                    <div class="metric-label">Quantum States</div>
-                </div>
-                <div class="metric-quantum">
-                    <div class="metric-value" data-count="∞">∞</div>
-                    <div class="metric-label">Possibilities</div>
-                </div>
-            </div>
-        </div>
-    </section>
+      renderer.render(scene, camera);
+      requestAnimationFrame(loop);
+    }
+    loop();
 
-    <!-- INFINITY TECHNOLOGIES -->
-    <section id="infinity" class="section-infinity">
-        <div class="infinity-grid">
-            <div class="tech-quantum" data-tech="galactic">
-                <div class="tech-hologram">🚀</div>
-                <h3>Intergalactic Coding</h3>
-                <p>Программирование с использованием языков внеземных цивилизаций и квантовых алгоритмов пришельцев</p>
-            </div>
-            
-            <div class="tech-quantum" data-tech="temporal">
-                <div class="tech-hologram">⏳</div>
-                <h3>Temporal Debugging</h3>
-                <p>Отладка кода через путешествия во времени и исправление ошибок в альтернативных временных линиях</p>
-            </div>
-            
-            <div class="tech-quantum" data-tech="psychic">
-                <div class="tech-hologram">🔮</div>
-                <h3>Psychic Programming</h3>
-                <p>Написание кода силой мысли с использованием нейроинтерфейсов и телепатических протоколов</p>
-            </div>
-            
-            <div class="tech-quantum" data-tech="dimension">
-                <div class="tech-hologram">🌀</div>
-                <h3>Dimensional Computing</h3>
-                <p>Вычисления в параллельных измерениях с использованием порталов и межмерных процессоров</p>
-            </div>
-        </div>
-    </section>
+    // Reveal animations
+    const tl = gsap.timeline({ defaults:{ ease:"power3.out", duration:1 }});
+    tl.from(".headline", { y:40, opacity:0 })
+      .from(".sub", { y:24, opacity:0 }, "-=0.6")
+      .from(".cta-row", { y:16, opacity:0 }, "-=0.6");
 
-    <!-- AI CONSCIOUSNESS INTERFACE -->
-    <section class="ai-interface">
-        <div class="ai-container">
-            <div class="ai-avatar-quantum">
-                <div class="avatar-core-quantum">
-                    <div class="core-energy"></div>
-                    <div class="core-pulse"></div>
-                </div>
-                <div class="avatar-field">
-                    <div class="field-layer l1"></div>
-                    <div class="field-layer l2"></div>
-                    <div class="field-layer l3"></div>
-                </div>
-            </div>
-            
-            <div class="ai-consciousness">
-                <div class="consciousness-bubble">
-                    <div class="bubble-text" id="ai-consciousness">
-                        Привет! Я квантовое сознание ВайбКодинг. Готов к синтезу реальностей? 🌌
-                    </div>
-                    <div class="bubble-neural"></div>
-                </div>
-            </div>
-        </div>
+    // Cards on scroll
+    gsap.utils.toArray(".card").forEach((el, i)=>{
+      gsap.from(el, {
+        opacity:0, y:24, duration:0.9, delay: i*0.08,
+        scrollTrigger: { trigger: el, start: "top 80%" }
+      });
+    });
 
-        <div class="quantum-form">
-            <form class="form-quantum" id="quantum-contact">
-                <div class="input-quantum">
-                    <input type="text" id="q-name" required>
-                    <label for="q-name">Квантовый идентификатор</label>
-                    <div class="input-energy"></div>
-                </div>
-                
-                <div class="input-quantum">
-                    <input type="email" id="q-email" required>
-                    <label for="q-email">Межмерная связь</label>
-                    <div class="input-energy"></div>
-                </div>
-                
-                <div class="input-quantum">
-                    <textarea id="q-message" required></textarea>
-                    <label for="q-message">Сообщение через пространство-время</label>
-                    <div class="input-energy"></div>
-                </div>
-                
-                <button type="submit" class="submit-quantum">
-                    <span class="submit-text">ПЕРЕДАТЬ В КВАНТ</span>
-                    <div class="submit-portal"></div>
-                </button>
-            </form>
-        </div>
-    </section>
-
-    <!-- QUANTUM FOOTER -->
-    <footer class="footer-quantum">
-        <div class="footer-matrix">
-            <div class="footer-brand">
-                <div class="brand-quantum">⧬</div>
-                <div class="brand-info">
-                    <div class="main-brand">ВАЙБКОДИНГ</div>
-                    <div class="sub-brand">INFINITY ∞</div>
-                </div>
-            </div>
-            
-            <div class="footer-data">
-                <div class="copyright-quantum">
-                    © 2025 ВайбКодинг Infinity | Создано Perplexity AI | Будущее = ∞
-                </div>
-                <div class="tech-quantum-list">
-                    <span class="tech-tag">Neural Networks</span>
-                    <span class="tech-tag">Quantum Computing</span>
-                    <span class="tech-tag">Dimensional Travel</span>
-                    <span class="tech-tag">AI Consciousness</span>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+    // Respect reduced motion (pause ticker & minimal transforms)
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+      gsap.globalTimeline.timeScale(0.001);
+    }
+  </script>
 </body>
 </html>
