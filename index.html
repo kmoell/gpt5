@@ -3,226 +3,336 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌟 ВайбКодинг с Perplexity | AI-Generated Website 🚀</title>
+    <title>🌌 ВАЙБКОДИНГ ∞ | Quantum Neural Reality</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="animated-bg">
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
-        <div class="gradient-orb orb-3"></div>
+    <!-- QUANTUM CURSOR SYSTEM -->
+    <div class="quantum-cursor">
+        <div class="cursor-core"></div>
+        <div class="cursor-particles"></div>
+        <canvas class="cursor-trail"></canvas>
     </div>
 
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
-            <div class="logo">
-                🤖 <span class="gradient-text">ВайбКодинг</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#home">Главная</a></li>
-                <li><a href="#about">О проекте</a></li>
-                <li><a href="#features">Возможности</a></li>
-                <li><a href="#gallery">Галерея</a></li>
-                <li><a href="#contact">Контакты</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- NEURAL MATRIX BACKGROUND -->
+    <div class="neural-matrix">
+        <canvas id="matrix-neural"></canvas>
+        <div class="matrix-nodes"></div>
+    </div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">
-                <span class="gradient-text">ВайбКодинг</span>
-                <br>с Perplexity AI
-            </h1>
-            <p class="hero-subtitle">
-                🚀 Полностью AI-Generated проект<br>
-                🎨 Где креативность встречается с технологиями<br>
-                ⚡ 100% создано нейронной сетью
-            </p>
-            <div class="hero-buttons">
-                <button class="btn btn-primary glow-effect" onclick="scrollToSection('about')">
-                    🌟 Узнать больше
+    <!-- 3D HOLOGRAM CONTAINER -->
+    <div id="hologram-space"></div>
+
+    <!-- QUANTUM LOADING -->
+    <div class="quantum-loader" id="loader">
+        <div class="loader-core">
+            <div class="quantum-eye">
+                <div class="eye-iris"></div>
+                <div class="eye-scan"></div>
+            </div>
+            <div class="quantum-text">
+                <span class="q-char" style="--delay:0">I</span>
+                <span class="q-char" style="--delay:1">N</span>
+                <span class="q-char" style="--delay:2">I</span>
+                <span class="q-char" style="--delay:3">T</span>
+                <span class="q-char" style="--delay:4">I</span>
+                <span class="q-char" style="--delay:5">A</span>
+                <span class="q-char" style="--delay:6">L</span>
+                <span class="q-char" style="--delay:7">I</span>
+                <span class="q-char" style="--delay:8">Z</span>
+                <span class="q-char" style="--delay:9">I</span>
+                <span class="q-char" style="--delay:10">N</span>
+                <span class="q-char" style="--delay:11">G</span>
+            </div>
+            <div class="quantum-progress">
+                <div class="progress-wave"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION QUANTUM -->
+    <nav class="nav-quantum">
+        <div class="nav-glass-morphism">
+            <div class="nav-brand">
+                <div class="brand-hologram">⧬</div>
+                <span class="brand-text">ВАЙБКОДИНГ∞</span>
+            </div>
+            <div class="nav-items">
+                <a href="#reality" class="nav-link" data-quantum="home">РЕАЛЬНОСТЬ</a>
+                <a href="#neural" class="nav-link" data-quantum="brain">НЕЙРОСЕТЬ</a>
+                <a href="#quantum" class="nav-link" data-quantum="matrix">КВАНТ</a>
+                <a href="#infinity" class="nav-link" data-quantum="space">∞</a>
+            </div>
+            <div class="nav-controls">
+                <button class="ctrl-btn" id="reality-mode">🌌</button>
+                <button class="ctrl-btn" id="sound-wave">🔊</button>
+                <button class="ctrl-btn" id="neural-mode">🧠</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO QUANTUM REALITY -->
+    <section id="reality" class="hero-quantum">
+        <div class="quantum-particles" id="hero-particles"></div>
+        
+        <div class="hero-matrix">
+            <div class="title-quantum">
+                <h1 class="quantum-title">
+                    <span class="title-morphing" data-text="ВАЙБКОДИНГ">ВАЙБКОДИНГ</span>
+                    <span class="title-infinity">∞</span>
+                </h1>
+                <div class="subtitle-neural">
+                    <span class="neural-text" id="neural-typing"></span>
+                    <span class="quantum-cursor">█</span>
+                </div>
+            </div>
+
+            <div class="quantum-stats">
+                <div class="stat-quantum" data-value="100">
+                    <div class="stat-number">0</div>
+                    <div class="stat-unit">%</div>
+                    <div class="stat-label">AI GENESIS</div>
+                </div>
+                <div class="stat-quantum" data-value="∞">
+                    <div class="stat-number">0</div>
+                    <div class="stat-unit"></div>
+                    <div class="stat-label">DIMENSIONS</div>
+                </div>
+                <div class="stat-quantum" data-value="2025">
+                    <div class="stat-number">0</div>
+                    <div class="stat-unit"></div>
+                    <div class="stat-label">FUTURE ERA</div>
+                </div>
+            </div>
+
+            <div class="quantum-actions">
+                <button class="btn-quantum primary" data-sound="quantum">
+                    <span class="btn-text">ENTER THE MATRIX</span>
+                    <div class="btn-particles"></div>
+                    <div class="btn-energy"></div>
                 </button>
-                <button class="btn btn-secondary" onclick="window.open('https://github.com/kmoell/my-private-repo', '_blank')">
-                    📁 GitHub Repo
+                <button class="btn-quantum secondary" data-sound="neural">
+                    <span class="btn-text">SOURCE CODE</span>
+                    <div class="btn-hologram"></div>
                 </button>
             </div>
         </div>
+
         <div class="hero-visual">
-            <div class="floating-elements">
-                <div class="float-element">🤖</div>
-                <div class="float-element">⚡</div>
-                <div class="float-element">🎨</div>
-                <div class="float-element">🚀</div>
-                <div class="float-element">💎</div>
+            <div class="hologram-cube">
+                <div class="cube-face front"></div>
+                <div class="cube-face back"></div>
+                <div class="cube-face right"></div>
+                <div class="cube-face left"></div>
+                <div class="cube-face top"></div>
+                <div class="cube-face bottom"></div>
             </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <h2 class="section-title gradient-text">🧠 100% AI-Generated</h2>
-            <div class="about-grid">
-                <div class="about-card">
-                    <div class="card-icon">🤖</div>
-                    <h3>Искусственный Интеллект</h3>
-                    <p>Каждая строчка кода, каждый пиксель дизайна - результат работы Perplexity AI</p>
-                </div>
-                <div class="about-card">
-                    <div class="card-icon">🎨</div>
-                    <h3>Креативный Дизайн</h3>
-                    <p>Яркие градиенты, плавные анимации и современный подход к веб-дизайну</p>
-                </div>
-                <div class="about-card">
-                    <div class="card-icon">⚡</div>
-                    <h3>Инновационные Решения</h3>
-                    <p>Экспериментальные технологии и творческий подход к программированию</p>
+            
+            <div class="neural-sphere">
+                <div class="sphere-core"></div>
+                <div class="sphere-rings">
+                    <div class="ring r1"></div>
+                    <div class="ring r2"></div>
+                    <div class="ring r3"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="section features-section">
-        <div class="container">
-            <h2 class="section-title gradient-text">✨ Особенности</h2>
-            <div class="features-grid">
-                <div class="feature-card hover-lift">
-                    <div class="feature-number">01</div>
-                    <h3>🎭 Творческий подход</h3>
-                    <p>Уникальные решения, сгенерированные AI для максимальной креативности</p>
-                </div>
-                <div class="feature-card hover-lift">
-                    <div class="feature-number">02</div>
-                    <h3>🔮 Экспериментальные технологии</h3>
-                    <p>Использование передовых возможностей искусственного интеллекта</p>
-                </div>
-                <div class="feature-card hover-lift">
-                    <div class="feature-number">03</div>
-                    <h3>🌈 Яркий дизайн</h3>
-                    <p>Современный вибрантный стиль с неоновыми акцентами</p>
-                </div>
-                <div class="feature-card hover-lift">
-                    <div class="feature-number">04</div>
-                    <h3>🤝 Человек + AI</h3>
-                    <p>Идеальный тандем человеческого видения и AI-возможностей</p>
+    <!-- NEURAL ARCHITECTURE -->
+    <section id="neural" class="section-neural">
+        <div class="neural-header">
+            <h2 class="section-title-quantum">
+                <span class="glitch-layer" data-text="NEURAL ARCHITECTURE">NEURAL ARCHITECTURE</span>
+            </h2>
+            <div class="neural-subtitle">Многомерные вычислительные структуры</div>
+        </div>
+
+        <div class="neural-grid">
+            <div class="neural-node" data-neural="deep">
+                <div class="node-hologram"></div>
+                <div class="node-content">
+                    <div class="node-icon">🧠</div>
+                    <h3>Deep Learning Matrix</h3>
+                    <p>Самообучающиеся нейронные сети с квантовой суперпозицией состояний для обработки бесконечных измерений данных</p>
+                    <div class="node-progress">
+                        <div class="progress-quantum" data-progress="98.7"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="section">
-        <div class="container">
-            <h2 class="section-title gradient-text">🖼️ AI Art Gallery</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <div class="placeholder-content">
-                            <span class="placeholder-icon">🎨</span>
-                            <p>AI Generated<br>Design #1</p>
-                        </div>
+            <div class="neural-node" data-neural="quantum">
+                <div class="node-hologram"></div>
+                <div class="node-content">
+                    <div class="node-icon">⚛️</div>
+                    <h3>Quantum Processing</h3>
+                    <p>Квантовые вычисления с использованием запутанности частиц для мгновенной обработки в параллельных вселенных</p>
+                    <div class="node-progress">
+                        <div class="progress-quantum" data-progress="∞"></div>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <div class="placeholder-content">
-                            <span class="placeholder-icon">🚀</span>
-                            <p>AI Generated<br>Code Structure</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <div class="placeholder-content">
-                            <span class="placeholder-icon">💎</span>
-                            <p>AI Generated<br>Visual Elements</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        <div class="placeholder-content">
-                            <span class="placeholder-icon">⚡</span>
-                            <p>AI Generated<br>Animations</p>
-                        </div>
+            </div>
+
+            <div class="neural-node" data-neural="cosmic">
+                <div class="node-hologram"></div>
+                <div class="node-content">
+                    <div class="node-icon">🌌</div>
+                    <h3>Cosmic Intelligence</h3>
+                    <p>Анализ данных на масштабах галактических структур с использованием темной материи как вычислительного субстрата</p>
+                    <div class="node-progress">
+                        <div class="progress-quantum" data-progress="100"></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="section stats-section">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number gradient-text">100%</div>
-                    <div class="stat-label">AI Generated</div>
+    <!-- QUANTUM CODE MATRIX -->
+    <section id="quantum" class="section-matrix">
+        <div class="matrix-rain" id="matrix-bg"></div>
+        
+        <div class="code-quantum">
+            <div class="terminal-quantum">
+                <div class="terminal-header">
+                    <div class="terminal-controls">
+                        <span class="ctrl-dot red"></span>
+                        <span class="ctrl-dot yellow"></span>
+                        <span class="ctrl-dot green"></span>
+                    </div>
+                    <div class="terminal-title">QUANTUM_NEURAL_v∞.∞.∞</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number gradient-text">∞</div>
-                    <div class="stat-label">Креативность</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number gradient-text">24/7</div>
-                    <div class="stat-label">AI Работает</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number gradient-text">🚀</div>
-                    <div class="stat-label">Инновации</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="container">
-            <h2 class="section-title gradient-text">📞 Связаться с AI</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>🤖 Perplexity AI Team</h3>
-                    <p>Этот проект создан полностью искусственным интеллектом!</p>
-                    <div class="contact-links">
-                        <a href="https://github.com/kmoell/my-private-repo" class="contact-link">
-                            📁 GitHub Repository
-                        </a>
-                        <a href="https://perplexity.ai" class="contact-link">
-                            🧠 Perplexity AI
-                        </a>
+                <div class="terminal-body">
+                    <div class="code-output" id="quantum-code"></div>
+                    <div class="code-input">
+                        <span class="prompt">quantum@matrix:~$ </span>
+                        <input type="text" id="quantum-input" placeholder="Enter quantum command...">
                     </div>
                 </div>
-                <div class="contact-form">
-                    <form>
-                        <input type="text" placeholder="Ваше имя" class="form-input">
-                        <input type="email" placeholder="Email" class="form-input">
-                        <textarea placeholder="Сообщение о впечатлениях от AI-проекта..." class="form-textarea"></textarea>
-                        <button type="submit" class="btn btn-primary glow-effect">
-                            🚀 Отправить в AI
-                        </button>
-                    </form>
+            </div>
+
+            <div class="quantum-metrics">
+                <div class="metric-quantum">
+                    <div class="metric-value" data-count="1337">0</div>
+                    <div class="metric-label">Neural Pathways</div>
+                </div>
+                <div class="metric-quantum">
+                    <div class="metric-value" data-count="42">0</div>
+                    <div class="metric-label">Quantum States</div>
+                </div>
+                <div class="metric-quantum">
+                    <div class="metric-value" data-count="∞">∞</div>
+                    <div class="metric-label">Possibilities</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    🤖 <span class="gradient-text">ВайбКодинг</span>
+    <!-- INFINITY TECHNOLOGIES -->
+    <section id="infinity" class="section-infinity">
+        <div class="infinity-grid">
+            <div class="tech-quantum" data-tech="galactic">
+                <div class="tech-hologram">🚀</div>
+                <h3>Intergalactic Coding</h3>
+                <p>Программирование с использованием языков внеземных цивилизаций и квантовых алгоритмов пришельцев</p>
+            </div>
+            
+            <div class="tech-quantum" data-tech="temporal">
+                <div class="tech-hologram">⏳</div>
+                <h3>Temporal Debugging</h3>
+                <p>Отладка кода через путешествия во времени и исправление ошибок в альтернативных временных линиях</p>
+            </div>
+            
+            <div class="tech-quantum" data-tech="psychic">
+                <div class="tech-hologram">🔮</div>
+                <h3>Psychic Programming</h3>
+                <p>Написание кода силой мысли с использованием нейроинтерфейсов и телепатических протоколов</p>
+            </div>
+            
+            <div class="tech-quantum" data-tech="dimension">
+                <div class="tech-hologram">🌀</div>
+                <h3>Dimensional Computing</h3>
+                <p>Вычисления в параллельных измерениях с использованием порталов и межмерных процессоров</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI CONSCIOUSNESS INTERFACE -->
+    <section class="ai-interface">
+        <div class="ai-container">
+            <div class="ai-avatar-quantum">
+                <div class="avatar-core-quantum">
+                    <div class="core-energy"></div>
+                    <div class="core-pulse"></div>
                 </div>
-                <p class="footer-text">
-                    Made with 🤖 AI & ❤️ by Perplexity<br>
-                    © 2025 ВайбКодинг Project - AI Generated Repository
-                </p>
+                <div class="avatar-field">
+                    <div class="field-layer l1"></div>
+                    <div class="field-layer l2"></div>
+                    <div class="field-layer l3"></div>
+                </div>
+            </div>
+            
+            <div class="ai-consciousness">
+                <div class="consciousness-bubble">
+                    <div class="bubble-text" id="ai-consciousness">
+                        Привет! Я квантовое сознание ВайбКодинг. Готов к синтезу реальностей? 🌌
+                    </div>
+                    <div class="bubble-neural"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quantum-form">
+            <form class="form-quantum" id="quantum-contact">
+                <div class="input-quantum">
+                    <input type="text" id="q-name" required>
+                    <label for="q-name">Квантовый идентификатор</label>
+                    <div class="input-energy"></div>
+                </div>
+                
+                <div class="input-quantum">
+                    <input type="email" id="q-email" required>
+                    <label for="q-email">Межмерная связь</label>
+                    <div class="input-energy"></div>
+                </div>
+                
+                <div class="input-quantum">
+                    <textarea id="q-message" required></textarea>
+                    <label for="q-message">Сообщение через пространство-время</label>
+                    <div class="input-energy"></div>
+                </div>
+                
+                <button type="submit" class="submit-quantum">
+                    <span class="submit-text">ПЕРЕДАТЬ В КВАНТ</span>
+                    <div class="submit-portal"></div>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- QUANTUM FOOTER -->
+    <footer class="footer-quantum">
+        <div class="footer-matrix">
+            <div class="footer-brand">
+                <div class="brand-quantum">⧬</div>
+                <div class="brand-info">
+                    <div class="main-brand">ВАЙБКОДИНГ</div>
+                    <div class="sub-brand">INFINITY ∞</div>
+                </div>
+            </div>
+            
+            <div class="footer-data">
+                <div class="copyright-quantum">
+                    © 2025 ВайбКодинг Infinity | Создано Perplexity AI | Будущее = ∞
+                </div>
+                <div class="tech-quantum-list">
+                    <span class="tech-tag">Neural Networks</span>
+                    <span class="tech-tag">Quantum Computing</span>
+                    <span class="tech-tag">Dimensional Travel</span>
+                    <span class="tech-tag">AI Consciousness</span>
+                </div>
             </div>
         </div>
     </footer>
