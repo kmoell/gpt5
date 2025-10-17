@@ -3,148 +3,422 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Сверхкрасивый сайт</title>
+  <title>Nova — Жидкое стекло</title>
   <meta name="theme-color" content="#0b0f1a" />
   <meta name="color-scheme" content="dark light" />
 
   <!-- Inter (Google Fonts) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#070b14;
-      --ink:#e7ecff;
-      --muted:#b7c1ffcc;
-      --brand:#7c9bff;
-      --accent:#7affd1;
-      --glass-bg:rgba(255,255,255,0.06);
-      --glass-brd:rgba(255,255,255,0.16);
-      --blur:16px;
-      --radius:18px;
-      --grid:clamp(16px,1.5vw,24px);
-      --max:1120px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--ink);
-      background: radial-gradient(1200px 800px at 10% 10%, #0b1530 0%, transparent 60%),
-                  radial-gradient(1000px 700px at 90% 20%, #10244c 0%, transparent 60%),
-                  radial-gradient(1400px 900px at 50% 120%, #152f66 0%, transparent 60%),
-                  var(--bg);
-      overflow-x:hidden;
+      --bg: #040711;
+      --ink: #f0f4ff;
+      --muted: #a8b5e0;
+      --brand: #6d8bff;
+      --accent: #5affe6;
+      --glass-bg: rgba(255,255,255,0.03);
+      --glass-brd: rgba(255,255,255,0.12);
+      --glass-shadow: rgba(0,0,0,0.2);
+      --blur: 24px;
+      --radius: 20px;
+      --grid: clamp(14px,1.8vw,28px);
+      --max: 1280px;
+      --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
-    /* WebGL canvas under content */
+    *{box-sizing:border-box}
+    html,body{height:100%; scroll-behavior: smooth}
+    
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+      color: var(--ink);
+      background: 
+        radial-gradient(1400px 900px at 5% 15%, rgba(109,139,255,0.15) 0%, transparent 50%),
+        radial-gradient(1200px 800px at 95% 25%, rgba(90,255,230,0.12) 0%, transparent 45%),
+        radial-gradient(1600px 1000px at 50% 100%, rgba(109,139,255,0.08) 0%, transparent 55%),
+        linear-gradient(180deg, #040711 0%, #0a0f1c 100%);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Enhanced WebGL canvas */
     .webgl {
       position: fixed;
       inset: 0;
       z-index: 0;
       pointer-events: none;
+      opacity: 0.9;
     }
 
-    /* Soft grain */
+    /* Animated grain */
     .grain {
-      position: fixed; inset: 0; z-index: 1; pointer-events:none;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.05"/></svg>');
+      position: fixed; 
+      inset: 0; 
+      z-index: 1; 
+      pointer-events: none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23grain)" opacity="0.03"/></svg>');
       mix-blend-mode: soft-light;
+      animation: grain-drift 20s linear infinite;
     }
 
-    .wrap{position:relative; z-index:2}
-    .container{max-width:var(--max); margin:0 auto; padding:calc(var(--grid)*4) var(--grid)}
-
-    header{
-      display:flex; align-items:center; justify-content:space-between; gap:var(--grid);
-    }
-    .logo{
-      display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--ink);
-    }
-    .logo-badge{
-      width:36px; height:36px; border-radius:12px;
-      background: conic-gradient(from 210deg, #7affd188, #7c9bff88, #7affd188);
-      outline:1px solid var(--glass-brd);
-      box-shadow: 0 10px 40px #7c9bff22 inset, 0 0 0 1px #ffffff0d inset;
-    }
-    .nav{
-      display:flex; gap:12px; align-items:center;
-      background:var(--glass-bg); backdrop-filter: blur(var(--blur));
-      border:1px solid var(--glass-brd);
-      padding:6px; border-radius:999px;
-    }
-    .chip{
-      padding:10px 14px; border-radius:999px; color:var(--muted); text-decoration:none;
-      transition: color .25s, background .25s;
-    }
-    .chip:hover{ background:#ffffff14; color:var(--ink) }
-
-    .hero{
-      display:grid; grid-template-columns: 1fr; gap:calc(var(--grid)*2);
-      padding-block: calc(var(--grid)*6);
-      align-items:center;
-    }
-    .headline{
-      font-weight:900; letter-spacing:-0.02em;
-      font-size: clamp(38px, 6.8vw, 84px);
-      line-height: 0.98;
-    }
-    .sub{
-      font-size: clamp(16px, 2vw, 20px);
-      color:var(--muted);
-      max-width: 70ch;
-    }
-    .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:calc(var(--grid)*1.5) }
-    .btn{
-      appearance:none; border:0; border-radius:12px; padding:14px 18px; cursor:pointer;
-      color:#0b0f1a; background:linear-gradient(180deg, #8affdc, #67f0c0);
-      box-shadow: 0 8px 30px #67f0c033, 0 0 0 1px #ffffff33 inset;
-      font-weight:700;
-    }
-    .btn.alt{
-      color:var(--ink); background: linear-gradient(180deg, #8ea5ff, #6f8bff);
+    @keyframes grain-drift {
+      0%, 100% { transform: translate(0, 0) }
+      25% { transform: translate(-5px, -10px) }
+      50% { transform: translate(-10px, 5px) }
+      75% { transform: translate(5px, -5px) }
     }
 
-    .glass{
-      background: var(--glass-bg); backdrop-filter: blur(var(--blur));
+    .wrap { position: relative; z-index: 2; min-height: 100vh }
+    .container { 
+      max-width: var(--max); 
+      margin: 0 auto; 
+      padding: calc(var(--grid) * 2) var(--grid);
+    }
+
+    /* Liquid glass morphism */
+    .liquid-glass {
+      position: relative;
+      background: 
+        linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%),
+        radial-gradient(circle at 30% 30%, rgba(109,139,255,0.15) 0%, transparent 60%),
+        radial-gradient(circle at 70% 70%, rgba(90,255,230,0.1) 0%, transparent 60%);
+      backdrop-filter: blur(var(--blur)) saturate(180%);
+      -webkit-backdrop-filter: blur(var(--blur)) saturate(180%);
       border: 1px solid var(--glass-brd);
       border-radius: var(--radius);
-      padding: clamp(14px, 2.2vw, 22px);
-      box-shadow: 0 20px 60px #00000055, 0 0 0 1px #ffffff0d inset;
+      box-shadow: 
+        0 8px 32px var(--glass-shadow),
+        0 0 0 1px rgba(255,255,255,0.05) inset,
+        0 2px 16px rgba(109,139,255,0.1) inset;
+      transition: var(--transition);
+      overflow: hidden;
     }
 
-    .features{
-      display:grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: var(--grid); margin-top: calc(var(--grid)*3);
+    .liquid-glass::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.02) 50%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.6s ease;
     }
-    @media (max-width: 900px){
-      .features{ grid-template-columns: 1fr }
-    }
-    .card{
-      position:relative; overflow:hidden; transform-style: preserve-3d; will-change: transform;
-      transition: transform .3s ease, box-shadow .3s ease;
-    }
-    .card:hover{ transform: translateY(-6px); box-shadow: 0 24px 80px #00000077 }
-    .card h3{ margin:0 0 8px 0; font-size: 22px; letter-spacing:-0.01em }
-    .card p{ margin:0; color:var(--muted) }
 
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      background:#ffffff10; padding:8px 12px; border-radius:999px; border:1px solid #ffffff22;
-      color:var(--ink); font-size:14px;
+    .liquid-glass:hover::before {
+      opacity: 1;
+      animation: shimmer 2s ease-in-out;
     }
-    .grad-dot{ width:8px; height:8px; border-radius:99px; background:linear-gradient(180deg,var(--brand), var(--accent)) }
 
-    footer{
-      padding-block: calc(var(--grid)*4);
-      color:var(--muted);
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) }
+      100% { transform: translateX(100%) }
+    }
+
+    /* Header */
+    header {
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      gap: var(--grid);
+      padding: clamp(12px, 1.5vw, 20px);
+      margin-bottom: calc(var(--grid) * 2);
+    }
+
+    .logo {
+      display: flex; 
+      align-items: center; 
+      gap: 14px; 
+      text-decoration: none; 
+      color: var(--ink);
+      transition: var(--transition);
+    }
+
+    .logo:hover { transform: translateY(-1px) }
+
+    .logo-badge {
+      width: 42px; 
+      height: 42px; 
+      border-radius: 14px;
+      background: 
+        conic-gradient(from 135deg, #5affe6, #6d8bff, #a855f7, #5affe6),
+        radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-badge::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      background: var(--bg);
+      border-radius: 12px;
+    }
+
+    .logo strong { 
+      font-size: 20px; 
+      font-weight: 700; 
+      letter-spacing: -0.02em;
+    }
+
+    .nav {
+      display: flex; 
+      gap: 4px; 
+      align-items: center;
+      background: var(--glass-bg);
+      backdrop-filter: blur(var(--blur));
+      border: 1px solid var(--glass-brd);
+      padding: 6px; 
+      border-radius: 999px;
+    }
+
+    .chip {
+      padding: 12px 18px; 
+      border-radius: 999px; 
+      color: var(--muted); 
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      position: relative;
+      transition: var(--transition);
+      overflow: hidden;
+    }
+
+    .chip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .chip:hover::before { opacity: 1 }
+    .chip:hover { color: var(--ink); transform: scale(1.02) }
+
+    /* Hero section */
+    .hero {
+      padding: calc(var(--grid) * 3) clamp(16px, 2vw, 32px) calc(var(--grid) * 6);
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex; 
+      align-items: center; 
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(90,255,230,0.15) 0%, rgba(109,139,255,0.15) 100%);
+      padding: 8px 16px; 
+      border-radius: 999px; 
+      border: 1px solid rgba(90,255,230,0.3);
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: calc(var(--grid) * 1.5);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) }
+      50% { transform: translateY(-4px) }
+    }
+
+    .pulse-dot {
+      width: 8px; 
+      height: 8px; 
+      border-radius: 50%; 
+      background: linear-gradient(135deg, var(--accent), var(--brand));
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1) }
+      50% { opacity: 0.7; transform: scale(1.1) }
+    }
+
+    .headline {
+      font-weight: 900; 
+      font-size: clamp(36px, 8vw, 96px);
+      line-height: 0.95;
+      letter-spacing: -0.025em;
+      margin: 0 0 calc(var(--grid) * 1.5) 0;
+      background: linear-gradient(135deg, var(--ink) 0%, var(--muted) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: clamp(18px, 2.5vw, 24px);
+      color: var(--muted);
+      max-width: 64ch;
+      margin: 0 auto calc(var(--grid) * 2) auto;
+      font-weight: 400;
+    }
+
+    .cta-group { 
+      display: flex; 
+      gap: 16px; 
+      flex-wrap: wrap; 
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn {
+      appearance: none; 
+      border: 0; 
+      border-radius: 14px; 
+      padding: 16px 28px; 
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      color: #0a0f1c;
+      background: linear-gradient(135deg, #5affe6 0%, #4dd9c7 100%);
+      box-shadow: 
+        0 12px 40px rgba(90,255,230,0.25),
+        0 0 0 1px rgba(255,255,255,0.1) inset;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 
+        0 16px 50px rgba(90,255,230,0.35),
+        0 0 0 1px rgba(255,255,255,0.2) inset;
+    }
+
+    .btn-secondary {
+      color: var(--ink);
+      background: linear-gradient(135deg, rgba(109,139,255,0.2) 0%, rgba(90,255,230,0.1) 100%);
+      border: 1px solid var(--glass-brd);
+      backdrop-filter: blur(var(--blur));
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, rgba(109,139,255,0.3) 0%, rgba(90,255,230,0.2) 100%);
+    }
+
+    /* Feature grid */
+    .features {
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: calc(var(--grid) * 1.5); 
+      margin-top: calc(var(--grid) * 6);
+      padding: 0 clamp(16px, 2vw, 32px);
+    }
+
+    .feature-card {
+      padding: calc(var(--grid) * 1.5);
+      position: relative;
+      transform-style: preserve-3d;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px) rotateX(2deg) rotateY(2deg);
+    }
+
+    .feature-card:nth-child(even):hover {
+      transform: translateY(-8px) rotateX(2deg) rotateY(-2deg);
+    }
+
+    .feature-card h3 {
+      margin: 0 0 12px 0; 
+      font-size: 24px; 
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+    }
+
+    .feature-card p {
+      margin: 0; 
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* Gallery section */
+    .gallery {
+      margin-top: calc(var(--grid) * 8);
+      padding: calc(var(--grid) * 2);
+      text-align: center;
+    }
+
+    .gallery h3 {
+      margin: 0 0 16px 0; 
+      font-size: clamp(28px, 4vw, 42px); 
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .gallery p {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 60ch;
+      margin: 0 auto;
+    }
+
+    /* Footer */
+    footer {
+      padding: calc(var(--grid) * 4) clamp(16px, 2vw, 32px);
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      margin-top: calc(var(--grid) * 6);
+    }
+
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+      .nav { display: none }
+      
+      .hero {
+        padding: calc(var(--grid) * 2) var(--grid) calc(var(--grid) * 4);
+      }
+      
+      .features {
+        grid-template-columns: 1fr;
+        gap: var(--grid);
+        margin-top: calc(var(--grid) * 4);
+      }
+      
+      .cta-group {
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 280px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: var(--grid) calc(var(--grid) * 0.75);
+      }
+      
+      .hero {
+        padding: var(--grid) 0 calc(var(--grid) * 3);
+      }
     }
 
     /* Respect reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      .card, .btn{ transition: none !important }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
@@ -154,171 +428,80 @@
 
   <div class="wrap">
     <div class="container">
-      <header class="glass">
+      <header class="liquid-glass">
         <a class="logo" href="#">
-          <span class="logo-badge"></span>
+          <div class="logo-badge"></div>
           <strong>Nova</strong>
         </a>
         <nav class="nav">
-          <a class="chip" href="#feat">Возможности</a>
-          <a class="chip" href="#show">Галерея</a>
-          <a class="chip" href="#cta">Контакты</a>
+          <a class="chip" href="#features">Возможности</a>
+          <a class="chip" href="#gallery">Галерея</a>
+          <a class="chip" href="#contact">Контакты</a>
         </nav>
       </header>
 
-      <section class="hero">
-        <div class="glass">
-          <span class="pill"><span class="grad-dot"></span> Сверхмягкие анимации</span>
-          <h1 class="headline">Красота, скорость и плавность без компромиссов</h1>
-          <p class="sub">Живой 3D‑фон, стекломорфные слои, точные скролл‑эффекты, адаптивная сетка и шрифт Inter для образцовой читабельности интерфейса [GSAP, Three.js, Lenis, Inter].</p>
-          <div class="cta-row" id="cta">
-            <button class="btn">Начать</button>
-            <button class="btn alt">Узнать больше</button>
+      <main>
+        <section class="hero">
+          <div class="hero-badge">
+            <div class="pulse-dot"></div>
+            <span>Жидкое стекло и магия анимаций</span>
           </div>
-        </div>
+          
+          <h1 class="headline">Красота без компромиссов</h1>
+          
+          <p class="subtitle">
+            Живой 3D‑фон, стекломорфные слои, точные скролл‑эффекты, 
+            адаптивная сетка и шрифт Inter для образцовой читабельности интерфейса.
+          </p>
+          
+          <div class="cta-group" id="contact">
+            <button class="btn btn-primary">Начать проект</button>
+            <button class="btn btn-secondary">Изучить код</button>
+          </div>
+        </section>
 
-        <div class="features" id="feat">
-          <div class="card glass">
+        <section class="features" id="features">
+          <div class="feature-card liquid-glass">
             <h3>3D‑частицы</h3>
-            <p>WebGL‑фон с мерцающими точками и параллаксом не нагружает вёрстку.</p>
+            <p>WebGL‑фон с интеллектуальными частицами, реагирующими на движения курсора с плавным параллаксом.</p>
           </div>
-          <div class="card glass">
+          
+          <div class="feature-card liquid-glass">
             <h3>Скролл‑магия</h3>
-            <p>Плавная прокрутка и точные триггеры появления блоков.</p>
+            <p>Сверхплавная прокрутка Lenis с точными триггерами появления и кинематографскими переходами.</p>
           </div>
-          <div class="card glass">
+          
+          <div class="feature-card liquid-glass">
             <h3>Доступность</h3>
-            <p>Уважение к prefers‑reduced‑motion и читабельная типографика.</p>
+            <p>Полное уважение к prefers-reduced-motion, семантическая разметка и идеальная типографика.</p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="glass" id="show" style="margin-top: clamp(24px,4vw,48px);">
-        <h3 style="margin:0 0 8px 0; font-size:26px; letter-spacing:-0.01em">Галерея эффектов</h3>
-        <p class="sub">Секции всплывают по ходу скролла, карточки чуть наклоняются, фон реагирует на курсор и глубину.</p>
-      </section>
+        <section class="gallery liquid-glass" id="gallery">
+          <h3>Галерея эффектов</h3>
+          <p>
+            Каждый элемент оживает в нужный момент. Карточки элегантно наклоняются, 
+            фон реагирует на глубину, а анимации подчиняются законам физики.
+          </p>
+        </section>
+      </main>
 
       <footer>
-        © 2025 Nova. Все права защищены.
+        <p>© 2025 Nova. Создано с любовью к деталям и современным веб-технологиям.</p>
       </footer>
     </div>
   </div>
 
-  <!-- GSAP + ScrollTrigger (jsDelivr) -->
+  <!-- GSAP + ScrollTrigger -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
 
-  <!-- Three.js (cdnjs) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js" integrity="sha512-8lY3l0nVdNnJc7jQh3J0Cq2z5g9A0V7fWzLwqNYkq4sQm0zTnN0vQq9T8hN8h5b5xV2Gz6b1Y1giJ2yq3oW9xA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 
-  <!-- Lenis (jsDelivr) -->
+  <!-- Lenis Smooth Scroll -->
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis/dist/lenis.min.js"></script>
 
-  <script>
-    // Smooth scroll (Lenis)
-    const lenis = new Lenis({ smoothWheel: true, wheelMultiplier: 0.9 });
-    function raf(t){ lenis.raf(t); requestAnimationFrame(raf) }
-    requestAnimationFrame(raf);
-
-    // Link Lenis with GSAP ScrollTrigger for perfect sync
-    gsap.registerPlugin(ScrollTrigger);
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((t)=>{ lenis.raf(t*1000) });
-    gsap.ticker.lagSmoothing(0);
-
-    // Three.js particles background
-    const canvas = document.getElementById('bg');
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
-    camera.position.set(0,0,8);
-
-    const particles = 2200;
-    const geo = new THREE.BufferGeometry();
-    const pos = new Float32Array(particles*3);
-    const speed = new Float32Array(particles);
-
-    for(let i=0;i<particles;i++){
-      const i3 = i*3;
-      pos[i3+0] = (Math.random()-0.5)*20;
-      pos[i3+1] = (Math.random()-0.5)*12;
-      pos[i3+2] = (Math.random()-0.5)*14;
-      speed[i] = 0.15 + Math.random()*0.45;
-    }
-    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-    geo.setAttribute('aSpeed', new THREE.BufferAttribute(speed, 1));
-
-    const mat = new THREE.PointsMaterial({
-      size: 0.035,
-      color: 0x9fb6ff,
-      transparent: true,
-      opacity: 0.9,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending
-    });
-    const points = new THREE.Points(geo, mat);
-    scene.add(points);
-
-    // Resize
-    function resize(){
-      const w = window.innerWidth, h = window.innerHeight;
-      renderer.setSize(w, h);
-      camera.aspect = w/h;
-      camera.updateProjectionMatrix();
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
-    // Parallax via mouse
-    const target = {x:0, y:0};
-    window.addEventListener('pointermove', (e)=>{
-      const x = (e.clientX / window.innerWidth) - 0.5;
-      const y = (e.clientY / window.innerHeight) - 0.5;
-      target.x = x; target.y = y;
-    });
-
-    // Animate
-    let t = 0;
-    function loop(){
-      t += 0.003;
-      const p = geo.attributes.position.array;
-      const s = geo.attributes.aSpeed.array;
-      for(let i=0;i<particles;i++){
-        const i3 = i*3;
-        p[i3+1] += Math.sin(t * s[i]) * 0.002; // subtle float
-        p[i3+0] += Math.cos(t * s[i]) * 0.0015;
-      }
-      geo.attributes.position.needsUpdate = true;
-
-      // soft parallax
-      camera.position.x += (target.x*1.2 - camera.position.x)*0.03;
-      camera.position.y += (-target.y*0.8 - camera.position.y)*0.03;
-      camera.lookAt(0,0,0);
-
-      renderer.render(scene, camera);
-      requestAnimationFrame(loop);
-    }
-    loop();
-
-    // Reveal animations
-    const tl = gsap.timeline({ defaults:{ ease:"power3.out", duration:1 }});
-    tl.from(".headline", { y:40, opacity:0 })
-      .from(".sub", { y:24, opacity:0 }, "-=0.6")
-      .from(".cta-row", { y:16, opacity:0 }, "-=0.6");
-
-    // Cards on scroll
-    gsap.utils.toArray(".card").forEach((el, i)=>{
-      gsap.from(el, {
-        opacity:0, y:24, duration:0.9, delay: i*0.08,
-        scrollTrigger: { trigger: el, start: "top 80%" }
-      });
-    });
-
-    // Respect reduced motion (pause ticker & minimal transforms)
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches){
-      gsap.globalTimeline.timeScale(0.001);
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
